@@ -11,4 +11,28 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+
+    //---------------------------------------------------------------------------
+    //Strings for Menu
+    <string name="description">Description</string>
+    <string name="value">Value</string>
+
+    <string name="month_spending">Month Spending</string>
+    <string name="month_spend_value">Value</string>
+    <string name="total_year_spending">Total Year Spending</string>
+    <string name="total_year_spend_value">Value</string>
+
+    <string name="month_earning">Month Earning</string>
+    <string name="month_earn_value">Value</string>
+    <string name="total_year_earning">Total Year Earning</string>
+    <string name="total_year_earn_value">Value</string>
+
+    <string name="month_profit_loss">Month Profit/Loss</string>
+    <string name="month_pl_value">Value</string>
+    <string name="total_year_profit_loss">Total Year Profit/Loss</string>
+    <string name="year_pl_value">Value</string>
+
+    <string name="action_add_Revenue">Add Revenue</string>
+    <string name="action_add_Expense">Add Expense</string>
+
 </resources>

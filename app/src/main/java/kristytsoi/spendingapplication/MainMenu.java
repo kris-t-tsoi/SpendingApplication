@@ -106,6 +106,17 @@ public class MainMenu extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Menu - Add Button Event Handler
+    public void addMenu(View view) {
+    }
+
+
+    //Menu - Setting Button Event Handler
+    public void settings (View view) {
+    }
+
+
+
     /**
      * A placeholder fragment containing a simple view.
      */
