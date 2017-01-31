@@ -1,6 +1,7 @@
 package kristytsoi.spendingapplication;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 
 public class MainMenu extends ActionBarActivity
@@ -37,6 +42,7 @@ public class MainMenu extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        //When start applicaiton get the draw fragment and set it up
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -45,7 +51,45 @@ public class MainMenu extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
+        //Start adding detail row fragments into the list in the main menu
+        MenuListItemDetails[] menuDetails =  setMenuRowDetails();
+
+        // The ListAdapter acts as a bridge between the data and each ListItem
+        // You fill the ListView with a ListAdapter. You pass it a context represented by
+        // this. A Context provides access to resources you need.
+        ListAdapter theAdapter = new MenuListAdapter(this, menuDetails);
+
+        // ListViews display data in a scrollable list
+        ListView theListView = (ListView) findViewById(R.id.main_detail_overview);
+
+        // Tells the ListView what data to use
+        theListView.setAdapter(theAdapter); //TODO null pointer exception
+
+
+
+
     }
+
+    MenuListItemDetails[] setMenuRowDetails(){
+        CalculateCostValues calculate = new CalculateCostValues();
+
+        MenuListItemDetails monthSpending = new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateMonthlySpending());
+        MenuListItemDetails yearSpending = new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateYearlySpending());
+
+        MenuListItemDetails monthEarning = new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateMonthlyEarning());
+        MenuListItemDetails yearEarning= new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateYearlyEarning());
+
+        MenuListItemDetails monthProfLoss = new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateMonthlyProfitLoss());
+        MenuListItemDetails yearProfLoss = new MenuListItemDetails(getResources().getString(R.string.month_spending), calculate.calculateYearlyProfitLoss());
+
+
+        return new MenuListItemDetails[]{monthSpending,monthEarning,monthProfLoss,yearSpending,yearEarning,yearProfLoss};
+
+    }
+
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -91,6 +135,8 @@ public class MainMenu extends ActionBarActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    //Option selection on top right
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -98,7 +144,7 @@ public class MainMenu extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //TODO settings
         if (id == R.id.action_settings) {
             return true;
         }
@@ -107,13 +153,14 @@ public class MainMenu extends ActionBarActivity
     }
 
     //Menu - Add Button Event Handler
-    public void addMenu(View view) {
+    public void addExpense (View view) {
+
     }
 
+    public void addRevenue (View view) {
 
-    //Menu - Setting Button Event Handler
-    public void settings (View view) {
     }
+
 
 
 
